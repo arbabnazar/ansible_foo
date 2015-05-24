@@ -1,7 +1,7 @@
 ---
 - hosts: all
   remote_user: vagrant
-  sudo: true
+  become: true
   vars:
     complex_arg1: '[{"name":"bob", "address":"mars"},{"name":"mary"}]'
   tasks:
