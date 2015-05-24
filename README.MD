@@ -15,11 +15,11 @@ To use:
 * install virtualbox and vagrant
 * start the relevant box(es)
 
-     vagrant up
-     # or
-     vagrant up centos70
+        vagrant up
+        # or
+        vagrant up centos70
 
 * run a playbook, e.g.
 
-     ansible-playbook plays/yaml_syntax.yml --limit centos66
+         ansible-playbook plays/yaml_syntax.yml --limit centos66
 
