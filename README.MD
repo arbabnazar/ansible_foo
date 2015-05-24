@@ -11,7 +11,15 @@ It's currently got
 
 _Note the optional use of vagrant-cachier, and the fact centos66 is the primary, all others are disabled by default._ 
 
-To run a playbook, use something like this...
+To use:
+* install virtualbox and vagrant
+* start the relevant box(es)
+
+     vagrant up
+     # or
+     vagrant up centos70
+
+* run a playbook, e.g.
 
      ansible-playbook plays/yaml_syntax.yml --limit centos66
 
