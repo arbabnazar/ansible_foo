@@ -3,6 +3,9 @@
   remote_user: vagrant
   sudo: true
   tasks:
+    - assert: 
+        that: "ansible_os_family == 'RedHat'"
+
     - get_installed:
 
     - debug: var=hostvars[inventory_hostname]['packages_installed']
