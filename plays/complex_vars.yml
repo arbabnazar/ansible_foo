@@ -1,0 +1,21 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: true
+  vars:
+    complex_arg1: '[{"name":"bob", "address":"mars"},{"name":"mary"}]'
+  tasks:
+    - set_fact: complex_arg1
+    - debug: var=hostvars[inventory_hostname]['complex_arg1']
+
+    - set_fact:
+        complex_arg2: '[{"name":"bob", "address":"mars"},{"name":"mary"}]'
+    - debug: var=hostvars[inventory_hostname]['complex_arg2']
+
+    - set_fact:
+        complex_arg3:
+          - name: bob
+            address: mars
+          - name: mary
+    - debug: var=hostvars[inventory_hostname]['complex_arg3']
+

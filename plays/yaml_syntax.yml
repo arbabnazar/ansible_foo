@@ -1,0 +1,63 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: true
+  tasks:
+    - name: single line plain style
+      file: path=/tmp/foo state=touch
+
+    - name: multi line plain style
+      file: path=/tmp/foo
+        state=absent
+
+    #- name: alternative multi line plain style
+    #  file: 
+    #    path=/tmp/foo
+    #    state=absent
+
+    - name: multi line double quoted style
+      file: "path=/tmp/foo 
+        state=touch"
+
+    - name: multi line single quoted style
+      file: 'path=/tmp/foo 
+        state=absent'
+
+    # With the yaml 'folded' style, anything in a new line (and indented) below a >
+    # is essentially a single string that has been wrapped.  new line chars are not 
+    # preserved unless the line is further indented or is an empty line.
+    - name: multi line with folded style
+      file: >
+        path=/tmp/foo
+        state=touch
+
+    - name: multi line with yaml dict - preferred
+      file:
+        path: /tmp/foo
+        state: absent
+
+    - name: using folded style to insert content
+      copy:
+        dest: /tmp/foo
+        content: >
+          this is a string
+          that will be one
+          line in the file
+
+    - shell: cat /tmp/foo
+      register: result
+
+    - debug: var=result
+
+    - name: using literal style to insert content - useful for cert files
+      copy:
+        dest: /tmp/foo
+        content: |
+          this is a string
+          that will have
+          new lines preserved
+
+    - shell: cat /tmp/foo
+      register: result
+
+    - debug: var=result

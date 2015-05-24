@@ -1,0 +1,12 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: true
+  vars:
+    mylist: 
+      - Alice
+      - Bob
+      - Carol
+    mylist2: "{{ mylist | map('map_format', pattern='%s.conf' ) | list }}"
+  tasks:
+    - debug: var=mylist2

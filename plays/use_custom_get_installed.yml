@@ -1,0 +1,11 @@
+---
+- hosts: all
+  remote_user: vagrant
+  sudo: true
+  tasks:
+    - get_installed:
+
+    - debug: var=hostvars[inventory_hostname]['packages_installed']
+
+    - debug: msg='do something when httpd is installed'
+      when: "'httpd' in packages_installed"

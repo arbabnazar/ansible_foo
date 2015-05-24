@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  tasks:
+    # ... create some instances
+    - ec2:
+        ...
+      register: ec2
+
+    # when needing to add all the ip's, use
+    - route53: 
+        ...
+        value: "{{ ec2.instances|map(attribute='public_ip')|join(',') }}"
