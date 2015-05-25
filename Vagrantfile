@@ -8,6 +8,12 @@ Vagrant.configure(2) do |config|
     config.cache.auto_detect = true
   end
 
+  # By default, Vagrant 1.7+ automatically inserts a different
+  # insecure keypair for each new VM created. The easiest way
+  # to use the same keypair for all the machines is to disable
+  # this feature and rely on the legacy insecure key.
+  config.ssh.insert_key = false
+
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "512", "--cpus", "2", "--ioapic", "on"]
   end

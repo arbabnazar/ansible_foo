@@ -11,7 +11,12 @@ It's currently got
 
 _Note the optional use of vagrant-cachier, and the fact centos66 is the primary, all others are disabled by default._ 
 
-To use:
+_Note I use a static inventory file, this is so I can easily place group_vars and host_vars relative to it, rather than using the vagrant provisioner generated one. Though I could probably do a symlink... (tbd)._
+
+_Note I'm not using the vagrant ansible provisioner at present, this is because I have a habit of creating random plays to try stuff, and it's easier to just run them from the command line in an adhoc fashion._
+
+###To use
+* install ansible
 * install virtualbox and vagrant
 * start the relevant box(es)
 
