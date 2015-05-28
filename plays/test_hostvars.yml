@@ -1,0 +1,8 @@
+---
+- hosts: ubuntu1204
+  remote_user: vagrant
+  gather_facts: false
+  tasks:
+    - debug: var=hostvars
+    - debug: var=hostvars[inventory_hostname]
+    - debug: var=hostvars['centos66']
