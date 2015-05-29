@@ -1,0 +1,9 @@
+---
+- hosts: centos66
+  remote_user: vagrant
+  vars: 
+    test: "{{ users | selectattr('password', 'undefined') | map(attribute='email') | list }}"
+
+  tasks:
+
+    - debug: var=test

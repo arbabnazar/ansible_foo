@@ -1,0 +1,13 @@
+---
+- hosts: centos66
+  remote_user: vagrant
+  tasks:
+    - set_fact: 
+        others: "{{ groups['all'] | difference('ubuntu1204') }}"
+
+    - add_host: 
+        name: "{{ item }}"
+        groups: all_but_ubuntu1204 
+      with_items: others
+
+    - debug: var=groups

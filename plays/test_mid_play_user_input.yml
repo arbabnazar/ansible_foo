@@ -1,0 +1,12 @@
+---
+- hosts: centos66
+  remote_user: vagrant
+  tasks:
+    - debug: msg='start of the play'
+
+    - pause: prompt='enter something now'
+      register: prompt_result
+
+    - debug: var=prompt_result
+
+    - debug: msg='end of the play'
