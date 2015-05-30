@@ -1,0 +1,8 @@
+---
+- hosts: centos66
+  remote_user: vagrant
+  vars:
+    var_in_play_vars: foo
+  roles:
+    - { role: test, my_role_var: "{{ var_in_play_vars }}" }
+    - { role: test, my_role_var: "{{ users }}" }

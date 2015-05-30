@@ -9,3 +9,5 @@ users:
   - name: fred
     email: fred@example.com
     password: 123!abc
+
+var_in_group_vars: bar
