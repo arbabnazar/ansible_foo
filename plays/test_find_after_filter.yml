@@ -1,0 +1,22 @@
+---
+- hosts: centos66
+  remote_user: vagrant
+  vars:
+    this:
+      is:
+        a:
+          - deeply
+          - nested
+          - dict
+      in which:
+        i:
+          - want
+          - to
+          - find at a value at least once
+  tasks:
+    - set_fact: 
+        exists: "{{ (this|to_json).find('want') }}"
+    
+    - debug: 
+        var: exists
+

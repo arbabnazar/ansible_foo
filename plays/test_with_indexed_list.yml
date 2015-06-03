@@ -1,0 +1,7 @@
+---
+- hosts: centos66
+  remote_user: vagrant
+  tasks:
+    - debug: msg="{{ hostvars[item.1]['ansible_ssh_host'] }} {{ 'host%02d' | format(item.0) }}"
+      with_indexed_items: groups['centos']
+

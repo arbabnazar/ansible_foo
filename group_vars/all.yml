@@ -10,4 +10,11 @@ users:
     email: fred@example.com
     password: 123!abc
 
-var_in_group_vars: bar
+var_in_group_vars: 
+  bar:
+    one: foo
+    two: faq
+
+adict:
+    foo: bar
+
