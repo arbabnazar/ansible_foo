@@ -1,0 +1,60 @@
+---
+- hosts: localhost
+  vars_files:
+    - vars/{{ env_stack }}.yml
+  tasks:
+
+    - name: process all VPCs in list 
+      ec2_vpc:
+      args:
+        "{{ item }}"
+      with_items: vpc_list
+      register: ec2_vpc_out
+
+    - debug: 
+        msg: "{{ ec2_vpc_out.results[0].subnets | get_subnets('Tier', 'public', 'cidr') }}"
+
+    - name: process all ec2 instances
+      ec2:
+        region: "{{ item.0.region }}"
+        keypair: "{{ item.0.keypair }}"
+        instance_type: "{{ item.0.instance_type }}"
+        image: "{{ item.0.image }}"
+        instance_tags: "{{ item.0.instance_tags }}"
+        exact_count: "{{ item.0.exact_count }}" 
+        count_tag: "{{ item.0.count_tag }}"
+        vpc_subnet_id: "{{ item.1.subnets | get_subnets('Tier', 'public') | first }}"
+        wait: yes
+        wait_timeout: 500
+      with_together:
+        - "{{ nat_list }}"
+        - "{{ ec2_vpc_out.results }}"
+      register: ec2_out
+
+    - debug: 
+        var: ec2_out
+
+    - name: update vpc routing tables
+      ec2_vpc:
+        region: "{{ item.0.region }}"
+        state: "{{ item.0.state }}"
+        cidr_block: "{{ item.0.cidr_block }}"
+        resource_tags: "{{ item.0.resource_tags }}"
+        internet_gateway: "{{ item.0.internet_gateway }}"
+        subnets: "{{ item.0.subnets }}"
+        route_tables:
+          - subnets: "{{ item.0.subnets | get_subnets('Tier', 'public', 'cidr') }}"
+            routes:
+              - dest: 0.0.0.0/0
+                gw: igw
+          - subnets: "{{ item.0.subnets | get_subnets('Tier', 'private', 'cidr') }}"
+            routes:
+              - dest: 0.0.0.0/0
+                gw: "{{ item.1.instance_ids[0] }}" 
+      with_together:
+        - "{{ vpc_list }}"
+        - "{{ ec2_out.results }}"
+      register: ec2_vpc_out
+      
+    - debug:
+        var: ec2_vpc_out 

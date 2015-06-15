@@ -1,0 +1,28 @@
+---
+# dev Environment
+vpc_list:
+  - region: eu-west-1
+    state: present
+    cidr_block: 10.1.0.0/16
+    resource_tags:
+      Environment: dev
+    internet_gateway: True
+    # there are 3 zones in eu-west-1 (Ireland)
+    subnets:
+      - cidr: 10.1.0.0/24
+        az: eu-west-1a
+        resource_tags: { "Name": "dev_public", "Environment": "dev", "Tier": "public" }
+      - cidr: 10.1.100.0/24
+        az: eu-west-1a
+        resource_tags: { "Name": "dev_private", "Environment": "dev", "Tier": "private" }
+
+nat_list:
+  - region: eu-west-1
+    keypair: ec2
+    instance_type: "t2.small" 
+    image: "ami-ef76e898" # amzn-ami-vpc-nat-hvm-2015.03.0.x86_64-ebs
+    instance_tags: { "Name": "dev_nat", "Environment": "dev" }
+    exact_count: 1
+    count_tag: { "Name": "dev_nat_instance" }
+
+

@@ -1,0 +1,8 @@
+---
+apache_user: httpd
+apache_group: httpd
+apache_config: /etc/httpd/conf/httpd.conf
+apache_pkgs:
+  - httpd
+  - mod_ssl
+apache_service: httpd

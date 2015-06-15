@@ -1,7 +1,7 @@
 #vagrant ansible_ssh_port=2222 ansible_ssh_host=127.0.0.1
 
 [foo]
-centos66 ansible_ssh_host=192.168.35.21 
+centos66 ansible_ssh_host=192.168.35.21 ansible_ssh_private_key=~/.vagrant/insecure_private_key
 
 [bar]
 ubuntu1204 ansible_ssh_host=192.168.35.31 

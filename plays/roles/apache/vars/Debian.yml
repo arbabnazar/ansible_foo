@@ -1,0 +1,8 @@
+---
+apache_user: www-data
+apache_group: www-data
+apache_config: /etc/apache2/httpd.conf
+apache_pkgs:
+  - apache2-mpm
+  - libapache-mod-ssl
+apache_service: apache2
