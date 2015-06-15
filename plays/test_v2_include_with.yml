@@ -1,0 +1,9 @@
+---
+- hosts: centos66
+  remote_user: vagrant
+  vars:
+    mylist:
+      - foo
+      - bar
+  roles:
+    - role: test

@@ -1,0 +1,6 @@
+---
+- hosts: centos66
+  remote_user: vagrant
+  tasks:
+    - shell: cat /etc/fstab
+

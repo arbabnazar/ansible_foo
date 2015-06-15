@@ -23,6 +23,6 @@ nat_list:
     image: "ami-ef76e898" # amzn-ami-vpc-nat-hvm-2015.03.0.x86_64-ebs
     instance_tags: { "Name": "dev_nat", "Environment": "dev" }
     exact_count: 1
-    count_tag: { "Name": "dev_nat_instance" }
+    count_tag: { "Name": "dev_nat" }
 
 
